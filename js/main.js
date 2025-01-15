@@ -7,13 +7,21 @@ const counterTasks = document.getElementById("counterTask");
 const footer = document.querySelector(".footer");
 const counterDone = document.getElementById("counterDone");
 
-function getData() {
+function getDataToDo() {
   let tasks = [];
   if (localStorage.getItem("tasks")) {
     tasks = JSON.parse(localStorage.getItem("tasks"));
   }
 
   return tasks;
+}
+
+function getDataDone() {
+  let tasksDone = [];
+  if (localStorage.getItem("tasksDone")) {
+    tasksDone = JSON.parse(localStorage.getItem("tasksDone"));
+  }
+  return tasksDone;
 }
 
 addBtn &&
@@ -26,14 +34,14 @@ addBtn &&
     let createTask = createTasks(todo.value, task.id);
     body.innerHTML += createTask;
 
-    let tasks = getData();
+    let tasks = getDataToDo();
     tasks.push(task);
     localStorage.setItem("tasks", JSON.stringify(tasks));
     todo.value = "";
   });
 
 document.addEventListener("DOMContentLoaded", function () {
-  let tasks = getData();
+  let tasks = getDataToDo();
   tasks.forEach((task) => {
     body.innerHTML += createTasks(task.taskName, task.id);
   });
@@ -47,11 +55,32 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", function () {
       tasksToAction.forEach((task) => {
         let taskDataId = task.getAttribute("data-id");
-        if(btnDataId === taskDataId){
-          task.style.display = 'none'
-          task.remove()
+        if (btnDataId === taskDataId) {
+          task.remove();
         }
+        tasks = tasks.filter((data) => data.id !== Number(btnDataId));
+        localStorage.setItem("tasks", JSON.stringify(tasks));
       });
     });
   });
+
+  doneBtns.forEach((btn) => {
+    btn.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      let taskDone = {
+        id: Number(btn.getAttribute("data-id")),
+        taskDone: btn.getAttribute('data-name')
+      };
+
+      let tasksDone = getDataDone()
+      tasksDone.push(taskDone)
+      localStorage.setItem("tasksDone", JSON.stringify(tasksDone));
+    });
+  });
+  let tasksDone = getDataDone()
+
+  tasksDone.forEach(done => {
+    footer.innerHTML += createDone(done.taskDone)
+  })
 });
