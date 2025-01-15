@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body style="background-color: black;">
-    <script src="main.js"></script>
-</body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="head">
+        <input type="text" placeholder="Add a new task" id="todo"/>
+        <button id="addBtn"><img src="img/Plus.svg" alt="" /></button>
+      </div>
+      <div class="body">
+        <h4 id="counterTask"></h4>
+      </div>
+      <div class="footer">
+        <h4 id="counterDone"></h4>
+        <div class="done">
+          <p id="counterDone">Lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/main.js" type="module"></script>
+  </body>
 </html>
