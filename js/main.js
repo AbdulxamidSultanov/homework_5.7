@@ -6,6 +6,7 @@ const body = document.querySelector(".body");
 const counterTasks = document.getElementById("counterTask");
 const footer = document.querySelector(".footer");
 const counterDone = document.getElementById("counterDone");
+let count = 0;
 
 function getDataToDo() {
   let tasks = [];
@@ -37,14 +38,20 @@ addBtn &&
     let tasks = getDataToDo();
     tasks.push(task);
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    count++;
+    counterTasks.textContent = `Tasks to do - ${count}`;
     todo.value = "";
   });
 
 document.addEventListener("DOMContentLoaded", function () {
   let tasks = getDataToDo();
+
   tasks.forEach((task) => {
     body.innerHTML += createTasks(task.taskName, task.id);
+    count++;
   });
+
+  counterTasks.textContent = `Tasks to do - ${count}`;
 
   const deleteBtns = document.querySelectorAll(".delete-btn");
   const doneBtns = document.querySelectorAll(".done-btn");
@@ -66,21 +73,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   doneBtns.forEach((btn) => {
     btn.addEventListener("click", function (event) {
+      const btnDataId = btn.getAttribute("data-id");
       event.preventDefault();
 
       let taskDone = {
         id: Number(btn.getAttribute("data-id")),
-        taskDone: btn.getAttribute('data-name')
+        taskDone: btn.getAttribute("data-name"),
       };
 
-      let tasksDone = getDataDone()
-      tasksDone.push(taskDone)
+      let tasksDone = getDataDone();
+      tasksDone.push(taskDone);
       localStorage.setItem("tasksDone", JSON.stringify(tasksDone));
+
+      tasksToAction.forEach((task) => {
+        let taskDataId = task.getAttribute("data-id");
+        if (btnDataId === taskDataId) {
+          task.remove();
+        }
+        tasks = tasks.filter((data) => data.id !== Number(btnDataId));
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      });
     });
   });
-  let tasksDone = getDataDone()
+  let tasksDone = getDataDone();
 
-  tasksDone.forEach(done => {
-    footer.innerHTML += createDone(done.taskDone)
-  })
+  tasksDone.forEach((done) => {
+    footer.innerHTML += createDone(done.taskDone);
+  });
 });
