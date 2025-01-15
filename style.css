@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+body,
+html {
+  background-color: #0d0714;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 583px;
+  width: 100%;
+  margin: 50px auto;
+  gap: 60px;
+  background-color: #1d1825;
+  padding: 50px 85px 55px 65px;
+  border-radius: 20px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.head > input {
+  height: 40px;
+  width: 381px;
+  border-radius: 10px;
+  border: 1px solid #9e78cf;
+}
+
+.head > button {
+  background-color: #9e78cf;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  padding: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.body, .footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.body > h4, .footer > h4 {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.tasks, .done {
+  background-color: #15101c;
+  width: 100%;
+  min-width: 432px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 20px;
+  border-radius: 10px;
+}
+
+.tasks > p {
+    color: #9E78CF;
+}
+
+.btns {
+    display: flex;
+    gap: 8px;
+}
+
+.btns > button {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.done > p {
+    color: #78CFB0;
+    text-decoration: line-through;
+}
+
+input{
+    color: #fff;
+    padding: 10px;
+    background-color: transparent;
+}
+
+input::placeholder {
+    color: #777777;
+    padding: 10px;
+}
